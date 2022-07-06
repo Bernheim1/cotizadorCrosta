@@ -1,0 +1,40 @@
+<div class="slide-in-right">
+    <div>
+        <h2 class="display-4 fw-normal" style="font-size: 50px; color: var(--colorBase)">Contratá: Paso 3/3</h2>
+      </div>
+      <div class="d-flex justify-content-start mt-3">
+        <h3 class="titulo">Datos del vehículo:</h3>
+        <ul class="text-start">
+          <li class="dato"> <span class="titulo">Localidad del riesgo: </span> {{this.serviceApi.datosAuto.localidad}}</li>
+          <li class="dato"> <span class="titulo">Email:  </span> {{this.serviceApi.datosAuto.email}}</li>
+          <li class="dato"> <span class="titulo">Vehículo:  </span> {{this.serviceApi.datosAuto.marca}} {{this.serviceApi.datosAuto.modelo}} {{this.serviceApi.datosAuto.anio}}</li>
+          <li class="dato"> <span class="titulo">Aseguradora:  </span> {{this.serviceApi.datosAuto.aseguradora}}</li>
+          <li class="dato"> <span class="titulo">Plan:  </span> {{this.serviceApi.datosAuto.plan}}</li>
+          <li class="dato"> <span class="titulo">Suma asegurada:  </span> 999.999</li>
+        </ul>
+    </div>
+    <div class="d-flex justify-content-start mt-3">
+        <h3 class="titulo">Datos personales:</h3>
+        <ul class="text-start">
+          <li class="dato"> <span class="titulo">N° de DNI: </span> {{this.serviceApi.datosCliente.dni}}</li>
+          <li class="dato"> <span class="titulo">Sexo: </span> {{this.serviceApi.datosCliente.sexo}}</li>
+          <li class="dato"> <span class="titulo">Nombre: </span> {{this.serviceApi.datosCliente.nombre}}</li>
+          <li class="dato"> <span class="titulo">Apellido: </span> {{this.serviceApi.datosCliente.apellido}}</li>
+        </ul>
+    </div>
+    <div class="d-flex justify-content-start mt-3">
+        <h3 class="titulo">Datos de contacto:</h3>
+        <ul class="text-start">
+          <li class="dato"> <span class="titulo">Localidad de residencia: </span> {{this.serviceApi.datosContacto.localidadResidencia}}</li>
+          <li class="dato"> <span class="titulo">Codigo postal: </span> {{this.serviceApi.datosContacto.codigoPostal}}</li>
+          <li class="dato"> <span class="titulo">Número de teléfono: </span> {{this.serviceApi.datosContacto.numCompleto}}</li>
+          <li class="dato"> <span class="titulo">Calle: </span> {{this.serviceApi.datosContacto.calle}} + {{this.serviceApi.datosContacto.numCalle}}</li>
+          <li class="dato"> <span class="titulo">Piso: </span> {{this.serviceApi.datosContacto.piso}}</li>
+          <li class="dato"> <span class="titulo">Calle: </span> {{this.serviceApi.datosContacto.dpto}}</li>
+        </ul>
+    </div>
+</div>
+
+
+
+

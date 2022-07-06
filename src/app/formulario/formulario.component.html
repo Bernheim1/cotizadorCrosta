@@ -1,0 +1,85 @@
+
+<div class="slide-in-right justify-content-center">
+    
+    
+    <form [formGroup]="form" (ngSubmit)="this.formCompleto(1)">
+        <div class="row d-flex">
+            <div class="row">
+                <div class="col">
+                    <h2 style="font-size: 40px; color: var(--colorBase)">Completá el formulario:</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 style="font-size: 20px;" class="mt-4 mb-4">Datos del vehículo:</h3>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 col-sm-12 col-md-4">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" formControlName="marca" placeholder="" value="" required>
+                        <div *ngIf="f['marca'].touched && f['marca'].invalid">
+                            <small *ngIf="f['marca'].errors && f['marca'].errors['required']" class="text-danger">La marca es requerida</small>
+                        </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4 col-md-2">
+                    <label for="anio">Año</label>
+                    <input type="number" class="form-control" formControlName="anio" placeholder="" value="" required>
+                        <div *ngIf="f['anio'].touched && f['anio'].invalid">
+                            <small *ngIf="f['anio'].errors && f['anio'].errors['required']" class="text-danger">El año es requerido</small>
+                            <small class="text-danger" *ngIf="f['anio'].errors['min'] || f['anio'].errors['max'] && f['anio'].touched">El año debe estar entre 1900 y 2024</small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" formControlName="modelo" placeholder="" value="" required>
+                            <div *ngIf="f['modelo'].touched && f['modelo'].invalid">
+                                <small *ngIf="f['modelo'].errors && f['modelo'].errors['required']" class="text-danger">El modelo es requerido</small>
+                            </div>
+                    </div>
+
+                    <div  class="col mt-4">
+                        <div style="font-size: 100%;">
+                            <fa-icon [icon]="faCircleExclamation"></fa-icon>
+                            Los seguros a cotizar son válidos para vehículos de uso particular no comercial radicados en la República Argentina (DNRPA)
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <h3 style="font-size: 20px;" class="mt-4 mb-4">Tus datos:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" formControlName="email" placeholder="" value="" required>
+                        <div *ngIf="f['email'].touched && f['email'].invalid">
+                            <small *ngIf="f['email'].errors && f['email'].errors['required']" class="text-danger">El email es requerido</small>
+                            <small *ngIf="f['email'].errors['email']" class="text-danger">Ingrese un email valido</small>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-8 col-lg-5">
+                        <label for="localidad">Localidad del riesgo</label>
+                        <input type="text" class="form-control" formControlName="localidad" placeholder="" value="" required>
+                            <div *ngIf="f['localidad'].touched && f['localidad'].invalid">
+                                <small *ngIf="f['localidad'].errors && f['localidad'].errors['required']" class="text-danger">La localidad es requerida</small>
+                            </div>
+                    </div>
+            </div>
+
+            <div class="row justify-content-end mt-5">
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-lg btn-outline-primary" style="height: 100%; width: 100%" [disabled]="form.invalid">
+                    Cotizar 
+                    </button>
+                </div>
+            </div>
+    </div>
+
+</form>
+</div>
