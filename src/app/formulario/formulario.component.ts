@@ -20,7 +20,8 @@ export class FormularioComponent implements OnInit {
       'anio': new FormControl ('', [Validators.required, Validators.min(1900), Validators.max(2024)]),
       'email': new FormControl ('', [Validators.required, Validators.email]),
       'modelo': new FormControl ('', Validators.required),
-      'localidad': new FormControl ('', Validators.required),
+      'provincia': new FormControl ('', Validators.required),
+      'codigoPostal': new FormControl ('', Validators.required),
     });
   }
 

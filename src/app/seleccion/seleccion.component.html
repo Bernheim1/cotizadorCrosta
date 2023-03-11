@@ -5,7 +5,7 @@
     </div>
     <div class="d-flex justify-content-start">
       <ul class="text-start">
-        <li class="dato"> <span class="titulo">Localidad del riesgo: </span> {{this.serviceApi.datosAuto.localidad}}</li>
+        <li class="dato"> <span class="titulo">Provincia del riesgo: </span> {{this.serviceApi.datosAuto.provincia}}</li>
         <li class="dato"> <span class="titulo">Email:  </span> {{this.serviceApi.datosAuto.email}}</li>
         <li class="dato"> <span class="titulo">Vehículo:  </span> {{this.serviceApi.datosAuto.marca}} {{this.serviceApi.datosAuto.modelo}} {{this.serviceApi.datosAuto.anio}}</li>
         <li class="dato"> <span class="titulo">Suma asegurada:  </span> 999.999</li>
@@ -13,21 +13,9 @@
     </div>
   </div>
 
-    <div class="row d-flex justify-content-around mb-3" style="padding: 0;">
-        <div class="col-md-3 mt-2">
-                <img src="https://www.allianz.com.ar/content/dam/onemarketing/system/allianz-logo.svg" alt=""  height="150px" width="300px" (click)="seleccionMarca('allianz')" [ngClass]="{'botonSeleccionado': marcaSeleccionada === 'allianz', 'botonMarca': marcaSeleccionada !== 'allianz'}">
-        </div>
-        <div class="col-md-3 mt-2">
-              <img src="https://corporate-site-content.gruposancorseguros.com/SSA/Press/imagen-sancor-seguros-es20180914092501763.png" height="150px" width="300px" (click)="seleccionMarca('sancor')" [ngClass]="{'botonSeleccionado': marcaSeleccionada === 'sancor', 'botonMarca': marcaSeleccionada !== 'sancor'}">
-        </div>
-        <div class="col-md-3 mt-2">
-              <img src="https://www.segurosaldia.com/wp/wp-content/uploads/2021/01/Logo-HDI-Seguros.png" alt="" height="150px" width="300px" (click)="seleccionMarca('hdi')" [ngClass]="{'botonSeleccionado': marcaSeleccionada === 'hdi', 'botonMarca': marcaSeleccionada !== 'hdi'}">
-        </div>
-    </div>
-
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
       <div class="col" *ngFor="let item of this.planes">
-        <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card mb-4 rounded-3 shadow-sm" [ngClass]="{'cardSeleccionado': planSeleccionado === this.item.titulo, 'card-outline-primary': planSeleccionado !== this.item.titulo}">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">{{this.item.titulo}}</h4>
           </div>
@@ -46,7 +34,7 @@
       </div>
     </div>
 
-    <h2 class="display-6 text-center mb-4">Compare plans</h2>
+    <!-- <h2 class="display-6 text-center mb-4">Compare plans</h2>
 
     <div class="table-responsive">
       <table class="table text-center">
@@ -100,7 +88,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
 
     <div class="d-flex justify-content-end">
       <button type="submit" class="btn btn-lg btn-outline-primary" style="height: 100%; width: 100%" [disabled]="this.planSeleccionado == null" (click)="this.selecCompleto(2)">

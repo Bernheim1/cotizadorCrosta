@@ -28,7 +28,7 @@
                     <input type="number" class="form-control" formControlName="dni" placeholder="" value="" required>
                         <div *ngIf="f['dni'].touched && f['dni'].invalid">
                             <small *ngIf="f['dni'].errors && f['dni'].errors['required']" class="text-danger">El dni es requerido</small>
-                            <small class="text-danger" *ngIf="f['dni'].errors['min'] || f['dni'].errors['max'] && f['dni'].touched">El número de dni debe ser valido</small>
+                            <small class="text-danger" *ngIf="f['dni']?.errors['min'] || f['dni']?.errors['max'] && f['dni'].touched">El número de dni debe ser valido</small>
                         </div>
                     </div>
     
