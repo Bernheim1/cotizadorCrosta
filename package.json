@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng deploy --base-href=https://Bernheim1.github.io/cotizadorcrosta",
+    "build": "ng deploy --base-href=https://bernheim1.github.io/cotizadorcrosta/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
