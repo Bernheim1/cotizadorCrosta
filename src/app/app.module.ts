@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { SeleccionComponent } from './seleccion/seleccion.component';
 import { FormContratarComponent } from './form-contratar/form-contratar.component';
-import { FormDatosContactoComponent } from './form-datos-contacto/form-datos-contacto.component';
-import { FormFinalComponent } from './form-final/form-final.component';
 import { RouterModule } from '@angular/router';
+
+import { HttpClientModule } from '@angular/common/http';
+import { ConfimacionEmailComponent } from './confimacion-email/confimacion-email.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,13 @@ import { RouterModule } from '@angular/router';
     FormularioComponent,
     SeleccionComponent,
     FormContratarComponent,
-    FormDatosContactoComponent,
-    FormFinalComponent
+    ConfimacionEmailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
   ],

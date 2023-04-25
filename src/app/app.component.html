@@ -15,8 +15,7 @@
           <app-formulario *ngIf="this.step == 0" (cambioStep)="eventoStep($event)"></app-formulario>
           <app-seleccion *ngIf="this.step == 1" (cambioStep)="eventoStep($event)"></app-seleccion>
           <app-form-contratar *ngIf="this.step == 2" (cambioStep)="eventoStep($event)"></app-form-contratar>
-          <app-form-datos-contacto *ngIf="this.step == 3" (cambioStep)="eventoStep($event)"></app-form-datos-contacto>
-          <app-form-final *ngIf="this.step == 4" (cambioStep)="eventoStep($event)"></app-form-final>
+          <app-confimacion-email *ngIf="this.step == 3" (cambioStep)="eventoStep($event)"></app-confimacion-email>
       </div>
     </div>
 

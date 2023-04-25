@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { ServiceApiService } from '../service-api.service';
+import { ApiService } from '../service/api.service';
+import { DataService } from '../service/data.service';
+
 
 @Component({
   selector: 'app-formulario',
@@ -12,16 +14,15 @@ export class FormularioComponent implements OnInit {
   faCircleExclamation = faCircleExclamation;
   public form !: FormGroup
   @Output() cambioStep = new EventEmitter();
-  
+  public data : any;
 
-  constructor(private fb : FormBuilder, public serviceApi : ServiceApiService) { 
+  constructor(private fb : FormBuilder, public apiService : ApiService, public dataService : DataService) { 
+
+    
     this.form = this.fb.group({
       'marca': new FormControl ('', Validators.required),
       'anio': new FormControl ('', [Validators.required, Validators.min(1900), Validators.max(2024)]),
-      'email': new FormControl ('', [Validators.required, Validators.email]),
       'modelo': new FormControl ('', Validators.required),
-      'provincia': new FormControl ('', Validators.required),
-      'codigoPostal': new FormControl ('', Validators.required),
     });
   }
 
@@ -33,7 +34,7 @@ export class FormularioComponent implements OnInit {
   }
 
   formCompleto(item : any){
-    this.serviceApi.datosAuto = this.form.getRawValue();
+    this.dataService.datosAuto = this.form.getRawValue();
     this.cambioStep.emit(item);
   }
 

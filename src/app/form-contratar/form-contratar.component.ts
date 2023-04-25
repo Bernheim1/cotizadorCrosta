@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServiceApiService } from '../service-api.service';
+import { ApiService } from '../service/api.service';
+import { DataService } from '../service/data.service';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 
 @Component({
   selector: 'app-form-contratar',
@@ -12,12 +14,12 @@ export class FormContratarComponent implements OnInit {
   public form !: FormGroup;
   @Output() cambioStep = new EventEmitter();
 
-  constructor(private fb : FormBuilder, public serviceApi : ServiceApiService) { 
+  constructor(private fb : FormBuilder, public apiService : ApiService, public dataService : DataService) { 
+
     this.form = this.fb.group({
       'dni': new FormControl ('', [Validators.required, Validators.min(20000000), Validators.max(65000000)]),
-      'sexo': new FormControl ('', Validators.required),
-      'nombre': new FormControl ('', Validators.required),
-      'apellido': new FormControl ('', Validators.required),
+      'email': new FormControl ('', [Validators.required, Validators.email]),
+      'telefono': new FormControl ('', Validators.required),
     });
   }
 
@@ -28,9 +30,37 @@ export class FormContratarComponent implements OnInit {
     return this.form.controls;
   }
 
-  formCompleto(item : any){
-    this.serviceApi.datosCliente = this.form.getRawValue();
-    this.cambioStep.emit(item);
+  formCompleto(){
+
+    this.dataService.datosContacto = this.form.getRawValue();
+
+    let date = new Date();
+    var horaCotizacion = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}, ${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`
+
+    let datosEmail =  {
+      dni: this.dataService.datosContacto.dni,
+      telefono: this.dataService.datosContacto.telefono,
+      email: this.dataService.datosContacto.email,
+      marca: this.dataService.datosAuto.marca,
+      anio: this.dataService.datosAuto.anio,
+      modelo: this.dataService.datosAuto.modelo,
+      plan: this.dataService.datosAuto.plan,
+      horaCotizacion: horaCotizacion
+    }
+
+    // this.enviarEmail(datosEmail);
+
+    this.cambioStep.emit(3);
+    
+  }
+
+  enviarEmail(data : any){
+    emailjs.send('defaultEmail','template_pmj4jrq', data, 'Ye0FIL7GWwNX4Xi6p')
+    .then((result : EmailJSResponseStatus) => {
+      console.log(result.text);
+    }, (error) => {
+      console.log(error.text);
+    });
   }
 
 

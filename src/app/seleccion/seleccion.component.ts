@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ServiceApiService } from '../service-api.service';
+import { ApiService } from '../service/api.service';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-seleccion',
@@ -27,7 +28,7 @@ export class SeleccionComponent implements OnInit {
     precio : 40321
   };
 
-  constructor(public serviceApi : ServiceApiService) { 
+  constructor(public apiService : ApiService, public dataService : DataService) { 
     this.planSeleccionado = null;
 
     this.planes.push(this.plan1);
@@ -44,7 +45,7 @@ export class SeleccionComponent implements OnInit {
   }
 
   selecCompleto(item : any){
-    this.serviceApi.datosAuto.plan = this.planSeleccionado;
+    this.dataService.datosAuto.plan = this.planSeleccionado;
     this.cambioStep.emit(item);
   }
 

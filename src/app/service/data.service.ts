@@ -3,10 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceApiService {
+export class DataService {
 
   datosAuto : any;
-  datosCliente : any;
   datosContacto : any;
 
   constructor() { }

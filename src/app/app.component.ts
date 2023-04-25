@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faSquarePhone } from '@fortawesome/free-solid-svg-icons';
-import { ServiceApiService } from './service-api.service';
+import { DataService } from './service/data.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent {
 
   public step : any = 0;
 
-  constructor(public serviceApi : ServiceApiService){
+  constructor(public dataService : DataService){
   }
 
   eventoStep(evento : any){
