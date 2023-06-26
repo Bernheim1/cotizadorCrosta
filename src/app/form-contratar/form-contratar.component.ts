@@ -13,6 +13,7 @@ export class FormContratarComponent implements OnInit {
 
   public form !: FormGroup;
   @Output() cambioStep = new EventEmitter();
+  public mostrarSpinner : boolean = false;
 
   constructor(private fb : FormBuilder, public apiService : ApiService, public dataService : DataService) { 
 
@@ -32,6 +33,8 @@ export class FormContratarComponent implements OnInit {
 
   formCompleto(){
 
+    this.mostrarSpinner = true;
+
     this.dataService.datosContacto = this.form.getRawValue();
 
     let date = new Date();
@@ -44,11 +47,13 @@ export class FormContratarComponent implements OnInit {
       marca: this.dataService.datosAuto.marca,
       anio: this.dataService.datosAuto.anio,
       modelo: this.dataService.datosAuto.modelo,
-      plan: this.dataService.datosAuto.plan,
+      plan: this.dataService.datosAuto.plan.descripcionCobertura,
       horaCotizacion: horaCotizacion
     }
 
     // this.enviarEmail(datosEmail);
+
+    this.mostrarSpinner = false;
 
     this.cambioStep.emit(3);
     

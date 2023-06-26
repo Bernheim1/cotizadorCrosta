@@ -7,6 +7,7 @@ export class DataService {
 
   datosAuto : any;
   datosContacto : any;
+  datosCotizacion : any[] = [];
 
   constructor() { }
 }

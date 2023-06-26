@@ -12,6 +12,10 @@ import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ConfimacionEmailComponent } from './confimacion-email/confimacion-email.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { ConfimacionEmailComponent } from './confimacion-email/confimacion-email
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

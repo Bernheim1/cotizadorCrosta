@@ -10,33 +10,33 @@ import { DataService } from '../service/data.service';
 export class SeleccionComponent implements OnInit {
 
   planSeleccionado : any;
-  planes: any[] = [];
+  public coberturas : any[] = [];
+  public coberturasPreferencia : any[] = ['72','91','93'];
   @Output() cambioStep = new EventEmitter();
 
-  plan1 : any = {
-    titulo : 'Responsabilidad civil',
-    precio : 1388
-  };
-
-  plan2 : any = {
-    titulo : 'Terceros completo',
-    precio : 29872
-  };
-
-  plan3 : any = {
-    titulo : 'Todo riesgo con franquicia fija',
-    precio : 40321
-  };
 
   constructor(public apiService : ApiService, public dataService : DataService) { 
     this.planSeleccionado = null;
 
-    this.planes.push(this.plan1);
-    this.planes.push(this.plan2);
-    this.planes.push(this.plan3);
   }
 
   ngOnInit(): void {
+    this.coberturas = this.dataService.datosCotizacion.filter((x) => this.coberturasPreferencia.includes(x.codigoCobertura));
+
+    if(this.coberturas.length < 3){
+
+      let coberturasAux = this.dataService.datosCotizacion;
+      
+      for(let i = 0; i <= 4 - this.coberturas.length; i++){
+
+        var max = coberturasAux.reduce((a,b)=>a.codigoCobertura>b.codigoCobertura?a:b);
+        coberturasAux = coberturasAux.filter((x) => x.codigoCobertura != max.codigoCobertura);
+        this.coberturas.push(max);
+
+      }
+
+    }
+
   }
 
 

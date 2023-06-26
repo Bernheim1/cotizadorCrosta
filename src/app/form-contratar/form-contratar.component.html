@@ -5,11 +5,9 @@
           </div>
           <div class="d-flex justify-content-start mt-3">
             <ul class="text-start">
-              <li class="dato"> <span class="titulo">Email:  </span> {{this.dataService.datosAuto.email}}</li>
-              <li class="dato"> <span class="titulo">Vehículo:  </span> {{this.dataService.datosAuto.marca}} {{this.dataService.datosAuto.modelo}} {{this.dataService.datosAuto.anio}}</li>
-              <li class="dato"> <span class="titulo">Aseguradora:  </span> {{this.dataService.datosAuto.aseguradora}}</li>
-              <li class="dato"> <span class="titulo">Plan:  </span> {{this.dataService.datosAuto.plan}}</li>
-              <li class="dato"> <span class="titulo">Suma asegurada:  </span> 999.999</li>
+              <li class="dato"> <span class="titulo">Vehículo:  </span> {{this.dataService.datosAuto.marca.name}} {{this.dataService.datosAuto.modelo.description}} {{this.dataService.datosAuto.anio}}</li>
+              <li class="dato"> <span class="titulo">Plan:  </span> {{this.dataService.datosAuto.plan.descripcionCobertura}}</li>
+              <li class="dato"> <span class="titulo">Suma asegurada:  </span> {{this.dataService.datosCotizacion[0].sumaAsegurada | currency}}</li>
             </ul>
         </div>
     </div>
@@ -33,7 +31,7 @@
 
                     <div class="col-sm-12 col-md-6 col-lg-4" style="align-items: center;">
                         <label for="telefono">Teléfono celular</label>
-                        <input type="number" class="form-control" formControlName="telefono" id="telefono" placeholder="Teléfono" required>
+                        <input type="number" class="form-control" formControlName="telefono" id="telefono" placeholder="" required>
                         <div *ngIf="f['telefono'].touched && f['telefono'].invalid">
                             <small *ngIf="f['telefono'].errors && f['telefono'].errors['required']" class="text-danger">El número de teléfono es requerido</small>
                         </div>
@@ -65,3 +63,8 @@
 
 </div>
 
+<div class="preloader-wrapper" *ngIf="this.mostrarSpinner">
+    <div class="spinner-border" style="width: 8.5rem; height: 8.5rem; color: var(--colorBase); font-size: large;">
+
+    </div>
+</div>
