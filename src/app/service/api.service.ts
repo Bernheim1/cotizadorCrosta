@@ -23,7 +23,7 @@ export class ApiService {
       'Authorization': 'Basic ' + btoa('seguroscrosta@gmail.com:seguros.API2023')
     });
 
-    return this.http.post<any>('https://demo.api.infoauto.com.ar/cars/auth/login','', {headers});
+    return this.http.post<any>('/infoauto/cars/auth/login','', {headers});
 
   }
 
@@ -34,7 +34,7 @@ export class ApiService {
       'Authorization': 'Bearer ' + this.infoAutoService.token,
     });
 
-    return this.http.get<any[]>('https://demo.api.infoauto.com.ar/cars/pub/brands/',{headers});
+    return this.http.get<any[]>('/infoauto/cars/pub/brands/',{headers});
 
   }
 
@@ -51,14 +51,13 @@ export class ApiService {
       'Authorization': 'Bearer ' + this.infoAutoService.token,
     });
 
-    return this.http.get<any[]>(`https://demo.api.infoauto.com.ar/cars/pub/brands/${idMarca}/models/?prices_from=${auxAnio}&prices_to=${auxAnio}`,({headers}));
+    return this.http.get<any[]>(`/infoauto/cars/pub/brands/${idMarca}/models/?prices_from=${auxAnio}&prices_to=${auxAnio}`,({headers}));
   }
 
   getCotizacionFull() : Observable<any>{
 
     let headers = new HttpHeaders({
-      'Content-Type': 'text/xml',
-      'Accept': 'text/xml'
+      'Content-Type': 'text/plain',
     });
 
     let dateDesde = new Date();
@@ -84,8 +83,8 @@ export class ApiService {
               '            <cot:CalcularCotizacionFullVehiculo>' +
               '               <cot:codigoDeProductor>M3354</cot:codigoDeProductor>' +
               '               <cot:VehiculoACotizar>' +
-              `                  <cot:codigoMarcaModelo>${this.dataService.datosAuto.modelo.codia}</cot:codigoMarcaModelo>` +
-              `                  <cot:anioFabricacion>${this.dataService.datosAuto.anio}</cot:anioFabricacion>` +
+              `                  <cot:codigoMarcaModelo>180123</cot:codigoMarcaModelo>` +
+              `                  <cot:anioFabricacion>2020</cot:anioFabricacion>` +
               '                  <cot:valorVehiculo>0</cot:valorVehiculo>' +
               '                  <cot:codigoDeUso>1</cot:codigoDeUso>' +
               '                  <cot:es0Km>false</cot:es0Km>' +
@@ -130,17 +129,72 @@ export class ApiService {
               '   </soapenv:Body>' +
               '</soapenv:Envelope> ' 
 
-    return this.http.post('https://wbs.allianzonline.com.ar:8443/Cotizadores/Vehiculo/Externo/Operaciones/OpCotizadorVehiculoExtReqABCS',xml,{headers, responseType: 'text'});
+    return this.http.post('https://cotizadorcrosta.com/assets/php/cotizar.php',xml,{headers, responseType: 'text'});
   }
 
-  enviarEmail( e: Event){
-    e.preventDefault();
-    emailjs.sendForm('defaultEmail','template_pmj4jrq', e.target as HTMLFormElement, 'Ye0FIL7GWwNX4Xi6p')
-    .then((result : EmailJSResponseStatus) => {
-      console.log(result.text);
-    }, (error) => {
-      console.log(error.text);
+  // enviarEmail( e: Event){
+  //   e.preventDefault();
+  //   emailjs.sendForm('defaultEmail','template_pmj4jrq', e.target as HTMLFormElement, 'Ye0FIL7GWwNX4Xi6p')
+  //   .then((result : EmailJSResponseStatus) => {
+  //     console.log(result.text);
+  //   }, (error) => {
+  //     console.log(error.text);
+  //   });
+  // }
+
+  enviarEmail(dni : number, telefono : string, email : string, marca : string, anio : number, modelo : string, plan : string){
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'text/plain',
     });
+
+    let mensaje = '<p><span style="text-decoration: underline;"><strong>Datos del cliente:</strong></span></p>' +
+                  '<table style="border-collapse: collapse; width: 100%; height: 54px;" border="1"><colgroup><col style="width: 50.0436%;"><col style="width: 49.9564%;"></colgroup>' +
+                  '<tbody>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>DNI</strong></td>' +
+                  `<td style="height: 18px;">${dni}</td>` +
+                  '</tr>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>TELEFONO</strong></td>' +
+                  `<td style="height: 18px;">${telefono}</td>` +
+                  '</tr>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>EMAIL</strong></td>' +
+                  `<td style="height: 18px;">${email}</td>` +
+                  '</tr>' +
+                  '</tbody>' +
+                  '</table>' +
+                  '<p><span style="text-decoration: underline;"><strong>Datos del vehiculo:</strong></span></p>' +
+                  '<table style="border-collapse: collapse; width: 100%; height: 54px;" border="1"><colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>' +
+                  '<tbody>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>MARCA</strong></td>' +
+                  `<td style="height: 18px;">${marca}</td>` +
+                  '</tr>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>A&Ntilde;O</strong></td>' +
+                  `<td style="height: 18px;">${anio}</td>` +
+                  '</tr>' +
+                  '<tr style="height: 18px;">' +
+                  '<td style="height: 18px;"><strong>MODELO</strong></td>' +
+                  `<td style="height: 18px;">${modelo}</td>` +
+                  '</tr>' +
+                  '</tbody>' +
+                  '</table>' +
+                  '<p><span style="text-decoration: underline;"><strong>Datos del cobertura:</strong></span></p>' +
+                  '<table style="border-collapse: collapse; width: 100%;" border="1"><colgroup><col style="width: 49.9558%;"><col style="width: 49.9558%;"></colgroup>' +
+                  '<tbody>' +
+                  '<tr>' +
+                  '<td><strong>COBERTURA</strong></td>' +
+                  `<td>${plan}</td>` +
+                  '</tr>' +
+                  '</tbody>' +
+                  '</table>' 
+
+    
+    return this.http.post('https://cotizadorcrosta.com/assets/php/mail.php',mensaje,{headers, responseType: 'text'});
+
   }
 
 }

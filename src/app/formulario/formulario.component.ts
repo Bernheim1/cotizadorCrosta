@@ -166,7 +166,7 @@ export class FormularioComponent implements OnInit {
   }
 
   buscarInfoAuto(){
-    
+
     this.apiService.getInfoAutoToken().subscribe((data) => {
       this.infoAutoService.token = data.access_token;
 

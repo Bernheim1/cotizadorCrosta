@@ -37,36 +37,19 @@ export class FormContratarComponent implements OnInit {
 
     this.dataService.datosContacto = this.form.getRawValue();
 
-    let date = new Date();
-    var horaCotizacion = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}, ${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`
+    this.apiService.enviarEmail(this.dataService.datosContacto.dni,this.dataService.datosContacto.telefono,this.dataService.datosContacto.email,
+      this.dataService.datosAuto.marca,this.dataService.datosAuto.anio,this.dataService.datosAuto.modelo,this.dataService.datosAuto.plan.descripcionCobertura).subscribe((data) => {
 
-    let datosEmail =  {
-      dni: this.dataService.datosContacto.dni,
-      telefono: this.dataService.datosContacto.telefono,
-      email: this.dataService.datosContacto.email,
-      marca: this.dataService.datosAuto.marca,
-      anio: this.dataService.datosAuto.anio,
-      modelo: this.dataService.datosAuto.modelo,
-      plan: this.dataService.datosAuto.plan.descripcionCobertura,
-      horaCotizacion: horaCotizacion
-    }
+        if(parseInt(data) == 1){
+          this.mostrarSpinner = false;
 
-    // this.enviarEmail(datosEmail);
+          this.cambioStep.emit(3);
+        }else{
 
-    this.mostrarSpinner = false;
+        }
 
-    this.cambioStep.emit(3);
+      });
     
   }
-
-  enviarEmail(data : any){
-    emailjs.send('defaultEmail','template_pmj4jrq', data, 'Ye0FIL7GWwNX4Xi6p')
-    .then((result : EmailJSResponseStatus) => {
-      console.log(result.text);
-    }, (error) => {
-      console.log(error.text);
-    });
-  }
-
 
 }
